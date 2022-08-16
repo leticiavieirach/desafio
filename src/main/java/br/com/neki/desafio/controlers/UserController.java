@@ -2,12 +2,15 @@ package br.com.neki.desafio.controlers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.neki.desafio.entities.User;
@@ -26,4 +29,8 @@ public class UserController {
 		return new ResponseEntity<>(usuarioService.findAll(), headers, HttpStatus.OK);
 	}
 
+	@GetMapping("/login")
+	public String loginApp(@Valid @RequestParam String login, @RequestParam String senha) {
+		return usuarioService.loginApp(login, senha);
+	}
 }

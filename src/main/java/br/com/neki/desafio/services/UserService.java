@@ -10,12 +10,27 @@ import br.com.neki.desafio.repositories.UserRepository;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private UserRepository usuarioRepository;
-	
+
 	public List<User> findAll() {
 		return usuarioRepository.findAll();
+	}
+
+	public String loginApp(String login, String senha) {
+
+		User usuario = usuarioRepository.findByLogin(login);
+
+		if (usuarioRepository.findByLogin(login) != null) {
+			if (usuario.getSenhaUsuario().equals(senha)) {
+				return "Login confirmado!";
+			} else {
+				return "Login e/ou senha inválidos.";
+			}
+		} else {
+			return "Login e/ou senha inválidos.";
+		}
 	}
 
 }
