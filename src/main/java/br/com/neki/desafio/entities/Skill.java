@@ -1,57 +1,59 @@
 package br.com.neki.desafio.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "habilidade")
+@Table(name = "skill", schema = "teste_residencia")
 public class Skill {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "skill_seq")
+	@SequenceGenerator(name = "skill_seq", sequenceName = "skill_seq", initialValue = 1)
 	@Column(name = "id")
-	private Integer idHabilidade;
-	
+	private Integer id;
+
 	@Column(name = "version")
 	private String versaoHabilidade;
-	
+
 	@Column(name = "name")
 	private String nomeHabilidade;
-	
+
 	@Column(name = "description")
 	private String descricaoHabilidade;
-	
+
 	@Column(name = "image_url")
 	private String imagemHabilidade;
+	
+	@Column(name = "ativo")
+	private Boolean ativo;
 
 	public Skill() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-	public Skill(Integer idHabilidade, String versaoHabilidade, String nomeHabilidade, String descricaoHabilidade,
-			String imagemHabilidade) {
+	
+	public Skill(Integer id, String versaoHabilidade, String nomeHabilidade, String descricaoHabilidade,
+			String imagemHabilidade, Boolean ativo) {
 		super();
-		this.idHabilidade = idHabilidade;
+		this.id = id;
 		this.versaoHabilidade = versaoHabilidade;
 		this.nomeHabilidade = nomeHabilidade;
 		this.descricaoHabilidade = descricaoHabilidade;
 		this.imagemHabilidade = imagemHabilidade;
+		this.ativo = ativo;
 	}
 
-	public Integer getIdHabilidade() {
-		return idHabilidade;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdHabilidade(Integer idHabilidade) {
-		this.idHabilidade = idHabilidade;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getVersaoHabilidade() {
@@ -85,5 +87,13 @@ public class Skill {
 	public void setImagemHabilidade(String imagemHabilidade) {
 		this.imagemHabilidade = imagemHabilidade;
 	}
-	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 }

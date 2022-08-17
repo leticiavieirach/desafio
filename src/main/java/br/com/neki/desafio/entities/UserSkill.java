@@ -9,14 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_skill")
+@Table(name = "user_skill", schema = "teste_residencia")
 public class UserSkill {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_skill_seq")
+	@SequenceGenerator(name = "user_skill_seq", sequenceName = "user_skill_seq", initialValue = 1)
 	@Column(name = "id")
 	private Integer idUsuarioHabilidade;
 	

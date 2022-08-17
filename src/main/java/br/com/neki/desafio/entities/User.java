@@ -1,56 +1,56 @@
 package br.com.neki.desafio.entities;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "teste_residencia")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
+	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq", initialValue = 1)
 	@Column(name = "id")
-	private Integer idUsuario;
-	
+	private Integer id;
+
 	@Column(name = "login")
 	private String loginUsuario;
-	
+
 	@Column(name = "password")
 	private String senhaUsuario;
-	
+
 	@Column(name = "last_login_date")
 	private LocalDate ultimoLoginData;
-	
-//	@OneToMany(mappedBy = "user")
-//	private List<UserSkill> usuarioHabilidade;
+
+	@Column(name = "ativo")
+	private Boolean ativo;
 
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public User(Integer idUsuario, String loginUsuario, String senhaUsuario, LocalDate ultimoLoginData) {
+	public User(Integer id, String loginUsuario, String senhaUsuario, LocalDate ultimoLoginData, Boolean ativo) {
 		super();
-		this.idUsuario = idUsuario;
+		this.id = id;
 		this.loginUsuario = loginUsuario;
 		this.senhaUsuario = senhaUsuario;
 		this.ultimoLoginData = ultimoLoginData;
+		this.ativo = ativo;
 	}
 
-	public Integer getIdUsuario() {
-		return idUsuario;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getLoginUsuario() {
@@ -77,4 +77,11 @@ public class User {
 		this.ultimoLoginData = ultimoLoginData;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 }
