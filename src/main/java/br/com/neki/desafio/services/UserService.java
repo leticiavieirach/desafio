@@ -20,9 +20,9 @@ public class UserService {
 
 	public String loginApp(String login, String senha) {
 
-		User usuario = usuarioRepository.findByLogin(login);
+		User usuario = usuarioRepository.findByLoginUsuario(login);
 
-		if (usuarioRepository.findByLogin(login) != null) {
+		if (usuarioRepository.findByLoginUsuario(login) != null) {
 			if (usuario.getSenhaUsuario().equals(senha)) {
 				return "Login confirmado!";
 			} else {
