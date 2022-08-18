@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.neki.desafio.entities.Skill;
-import br.com.neki.desafio.entities.User;
 import br.com.neki.desafio.services.SkillService;
 
 @RestController
@@ -62,6 +61,5 @@ public class SkillController {
 		} else {
 			return new ResponseEntity<>(newHabilidade, headers, HttpStatus.BAD_REQUEST);
 		}
-	
 	}
 }

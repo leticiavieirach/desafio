@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.neki.desafio.dto.UserDTO;
 import br.com.neki.desafio.entities.User;
 import br.com.neki.desafio.services.UserService;
 
@@ -54,9 +53,14 @@ public class UserController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<User> save(@Valid @RequestBody UserDTO usuario) {
+	public ResponseEntity<User> save(@Valid @RequestBody User user) {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(usuarioService.save(usuario), headers, HttpStatus.OK);
+		User newUser = usuarioService.save(user);
+		if(null != newUser) {
+			return new ResponseEntity<>(newUser, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(newUser, headers, HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PutMapping("/{id}")
