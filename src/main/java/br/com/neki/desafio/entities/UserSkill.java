@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,26 +23,25 @@ public class UserSkill {
 	@Column(name = "id")
 	private Integer idUsuarioHabilidade;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", referencedColumnName = "id", insertable = true, updatable = false)
 	private User usuario;
 	
-	@ManyToOne
-	@JoinColumn(name = "skill_id", referencedColumnName = "id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "skill_id", referencedColumnName = "id", insertable = true, updatable = false)
 	private Skill habilidade;
 	
 	@Column(name = "knowledge_level")
-	private Integer nivelHabilidadeUsuario;
+	private Integer levelHabilidadeUsuario;
 	
 	@Column(name = "created_at")
 	private LocalDate dataCriacao;
 	
 	@Column(name = "updated_at")
 	private LocalDate dataAtualizacao;
-
+	
 	public UserSkill() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public UserSkill(Integer idUsuarioHabilidade, User usuario, Skill habilidade, Integer nivelHabilidadeUsuario,
@@ -50,7 +50,7 @@ public class UserSkill {
 		this.idUsuarioHabilidade = idUsuarioHabilidade;
 		this.usuario = usuario;
 		this.habilidade = habilidade;
-		this.nivelHabilidadeUsuario = nivelHabilidadeUsuario;
+		this.levelHabilidadeUsuario = nivelHabilidadeUsuario;
 		this.dataCriacao = dataCriacao;
 		this.dataAtualizacao = dataAtualizacao;
 	}
@@ -79,12 +79,12 @@ public class UserSkill {
 		this.habilidade = habilidade;
 	}
 
-	public Integer getNivelHabilidadeUsuario() {
-		return nivelHabilidadeUsuario;
+	public Integer getLevelHabilidadeUsuario() {
+		return levelHabilidadeUsuario;
 	}
 
-	public void setNivelHabilidadeUsuario(Integer nivelHabilidadeUsuario) {
-		this.nivelHabilidadeUsuario = nivelHabilidadeUsuario;
+	public void setLevelHabilidadeUsuario(Integer levelHabilidadeUsuario) {
+		this.levelHabilidadeUsuario = levelHabilidadeUsuario;
 	}
 
 	public LocalDate getDataCriacao() {
@@ -102,7 +102,5 @@ public class UserSkill {
 	public void setDataAtualizacao(LocalDate dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
-	
-	
 	
 }
