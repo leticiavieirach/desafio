@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.neki.desafio.dto.UserDTO;
 import br.com.neki.desafio.entities.User;
 import br.com.neki.desafio.repositories.UserRepository;
 
@@ -28,7 +30,9 @@ public class UserService {
 		User usuario = usuarioRepository.findByLoginUsuario(login);
 
 		if (usuario != null) {
-			if (usuario.getSenhaUsuario().equals(senha)) {
+			BCryptPasswordEncoder criptografar = new BCryptPasswordEncoder();
+			boolean senhaDescriptografada = criptografar.matches(senha, usuario.getSenhaUsuario());
+			if (senhaDescriptografada) {
 				return "Login confirmado!";
 			} else {
 				return "Login e/ou senha inválidos.";
@@ -47,8 +51,17 @@ public class UserService {
 		}
 	}
 
-	public User save(User usuario) {
-		return usuarioRepository.save(usuario);
+	public User save(UserDTO usuario) {
+		User user = new User();
+		BCryptPasswordEncoder criptografar = new BCryptPasswordEncoder();
+		String senhaCriptografada = criptografar.encode(usuario.getSenhaUsuario());
+		usuario.setSenhaUsuario(senhaCriptografada);
+		
+		user.setAtivo(true);
+		user.setSenhaUsuario(usuario.getSenhaUsuario());
+		user.setLoginUsuario(usuario.getLoginUsuario());
+		
+		return usuarioRepository.save(user);
 	}
 	
 	public User update(User usuario, Integer id) {
@@ -56,4 +69,5 @@ public class UserService {
 		return usuarioRepository.save(usuario);
 	}
 
+	
 }
