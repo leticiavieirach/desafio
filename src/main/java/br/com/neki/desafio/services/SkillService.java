@@ -26,15 +26,14 @@ public class SkillService {
 	public void deleteLogical(Integer id) {
 		Optional<Skill> habilidade = habilidadeRepository.findById(id);
 		if(habilidade.isPresent()) {
-			Skill usu = habilidade.get();
-			usu.setAtivo(false);
-			habilidadeRepository.save(usu);
+			Skill hab = habilidade.get();
+			hab.setAtivo(false);
+			habilidadeRepository.save(hab);
 		}
 	}
 	
 	public Skill save(Skill habilidade) {
-		Skill newHabilidade = habilidadeRepository.save(habilidade);
-		return newHabilidade;
+		return habilidadeRepository.save(habilidade);
 	}
 	
 	public Skill update(Skill habilidade, Integer id) {

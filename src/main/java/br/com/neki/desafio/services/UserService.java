@@ -6,9 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.neki.desafio.dto.UserDTO;
 import br.com.neki.desafio.entities.User;
-import br.com.neki.desafio.mapper.EntidadeDTOMapper;
 import br.com.neki.desafio.repositories.UserRepository;
 
 @Service
@@ -29,7 +27,7 @@ public class UserService {
 
 		User usuario = usuarioRepository.findByLoginUsuario(login);
 
-		if (usuarioRepository.findByLoginUsuario(login) != null) {
+		if (usuario != null) {
 			if (usuario.getSenhaUsuario().equals(senha)) {
 				return "Login confirmado!";
 			} else {
@@ -48,12 +46,9 @@ public class UserService {
 			usuarioRepository.save(usu);
 		}
 	}
-	
-	public User save(UserDTO usuarioDTO) {
-		EntidadeDTOMapper entidadeDTOMapper = new EntidadeDTOMapper();
-		User newUsuario = new User();
-		entidadeDTOMapper.userDTOToUser(newUsuario, usuarioDTO);
-		return usuarioRepository.save(newUsuario);
+
+	public User save(User usuario) {
+		return usuarioRepository.save(usuario);
 	}
 	
 	public User update(User usuario, Integer id) {
