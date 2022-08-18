@@ -13,8 +13,8 @@ import javax.persistence.Table;
 public class Skill {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "skill_seq")
-	@SequenceGenerator(name = "skill_seq", sequenceName = "skill_seq", initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "skill_seq")
+	@SequenceGenerator(name = "skill_seq", sequenceName = "teste_residencia.skill_seq", initialValue = 1, allocationSize = 1)
 	@Column(name = "id")
 	private Integer id;
 

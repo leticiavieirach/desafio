@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class UserSkill {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_skill_seq")
-	@SequenceGenerator(name = "user_skill_seq", sequenceName = "user_skill_seq", initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_skill_seq")
+	@SequenceGenerator(name = "user_skill_seq", sequenceName = "teste_residencia.user_skill_seq", initialValue = 1, allocationSize = 1)
 	@Column(name = "id")
 	private Integer idUsuarioHabilidade;
 	

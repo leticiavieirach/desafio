@@ -9,20 +9,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user", schema = "teste_residencia")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
-	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq", initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_seq")
+	@SequenceGenerator(name = "user_seq", sequenceName = "teste_residencia.user_seq", initialValue = 1, allocationSize = 1)
 	@Column(name = "id")
 	private Integer id;
 
+	@NotBlank(message = "O login não pode ficar vazio.")
+	@Size(max = 12, message = "O login não pode ultrapassar 12 caracteres.")
 	@Column(name = "login")
 	private String loginUsuario;
 
+	@NotBlank(message = "A senha não pode ficar vazia.")
+	@Size(max = 100, message = "A senha não pode ultrapassar 100 caracteres.")
 	@Column(name = "password")
 	private String senhaUsuario;
 
