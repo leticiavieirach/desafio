@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.neki.desafio.dto.UserDTO;
 import br.com.neki.desafio.entities.User;
 import br.com.neki.desafio.services.UserService;
 
@@ -36,7 +37,7 @@ public class UserController {
 	}
 
 	@GetMapping("/login")
-	public String loginApp(@Valid @RequestParam String login, @RequestParam String senha) {
+	public String login(@Valid @RequestParam String login, @RequestParam String senha) {
 		return usuarioService.loginApp(login, senha);
 	}
 	
@@ -53,7 +54,7 @@ public class UserController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<User> save(@Valid @RequestBody User user) {
+	public ResponseEntity<User> cadastro(@Valid @RequestBody UserDTO user) {
 		HttpHeaders headers = new HttpHeaders();
 		User newUser = usuarioService.save(user);
 		if(null != newUser) {
