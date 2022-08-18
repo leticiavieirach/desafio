@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.neki.desafio.dto.UserDTO;
 import br.com.neki.desafio.entities.User;
+import br.com.neki.desafio.entities.UserSkill;
 import br.com.neki.desafio.repositories.UserRepository;
 
 @Service
@@ -56,7 +57,7 @@ public class UserService {
 		BCryptPasswordEncoder criptografar = new BCryptPasswordEncoder();
 		String senhaCriptografada = criptografar.encode(usuario.getSenhaUsuario());
 		usuario.setSenhaUsuario(senhaCriptografada);
-		
+
 		user.setAtivo(true);
 		user.setSenhaUsuario(usuario.getSenhaUsuario());
 		user.setLoginUsuario(usuario.getLoginUsuario());
@@ -65,8 +66,15 @@ public class UserService {
 	}
 	
 	public User update(User usuario, Integer id) {
-		usuario.setId(id);
-		return usuarioRepository.save(usuario);
+		User newUsuario = new User();
+		usuario = usuarioRepository.findById(id).get();
+		
+		newUsuario.setId(id);
+		newUsuario.setLoginUsuario(usuario.getLoginUsuario());
+		newUsuario.setSenhaUsuario(usuario.getSenhaUsuario());
+		newUsuario.setAtivo(usuario.getAtivo());
+		
+		return usuarioRepository.save(newUsuario);
 	}
 
 	
